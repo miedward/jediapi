@@ -1,13 +1,10 @@
 var express = require('express');
-var bodyParser = require('body-parser');
+//var bodyParser = require('body-parser');
 const cors = require('cors');
 
 const port = 3000;
 
 app = express();
-
-//Cargar rutas
-var appRoutes = require('./app/routes/approutes.js');
 
 //cors
 //app.use(cors({origin: 'http://localhost'}));
@@ -18,10 +15,15 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 
+//express 4.16.x
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
+
+//Define routes LAST
+var appRoutes = require('./app/routes/approutes.js');
 
 app.use('/', cors(), appRoutes);
 app.listen(port, () => console.log(`Jediweb listening on port ${port}!`))

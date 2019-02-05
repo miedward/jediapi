@@ -30,7 +30,7 @@ var Wildcard = {
 
       //add our JSON results to the data table
       //apiResult.data = resultJson;
-      console.log(resultJson);
+      //console.log(resultJson);
       //send JSON to Express
       res.json(resultJson);
     });
