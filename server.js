@@ -1,5 +1,5 @@
 var express = require('express');
-//var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 const cors = require('cors');
 
 const port = 3000;
@@ -19,6 +19,7 @@ app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//older version of express
 //app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(bodyParser.json());
 

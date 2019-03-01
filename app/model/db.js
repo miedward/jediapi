@@ -8,6 +8,7 @@ var connection = mysql.createConnection({
     user     : 'jediweb',
     password : 'jediwebpass',
     database : 'jediweb'
+    //port     : 3360
 });
 
 connection.connect(function(err) {

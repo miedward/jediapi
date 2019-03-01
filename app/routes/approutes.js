@@ -8,10 +8,12 @@ const cors = require('cors');
 var corsOptions = {
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+};
 
 app.route('/jedi')
         .get(cors(corsOptions),wildcards.getAllItems);
+app.route('/jedi/login')
+    .post(cors(corsOptions),jedi.doLogin);
 app.route('/jedi/id/:rowId')
         .get(cors(corsOptions),jedi.getItemById)
         .put(cors(corsOptions),jedi.updateItemById)
@@ -24,4 +26,4 @@ app.route('/jedi/name/:name')
         .delete(cors(corsOptions),jedi.deleteItemByName);
 app.route('/tradition')
         .get(cors(corsOptions),wildcards.getAllItems);
-module.exports = router
+module.exports = router;
