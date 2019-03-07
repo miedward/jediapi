@@ -11,7 +11,7 @@ var Jedi = {
         var thisName = req.body.Name;
         var thisPass = req.body.Password;
         console.log('wut data: ' + thisName + ", " + thisPass);
-        var someJedi = db.query('SELECT '+star+' from jedi WHERE Name=?', [thisName], function (error, results) {
+        var someJedi = db.query('SELECT * from jedi WHERE Name=?', [thisName], function (error, results) {
             //if error, print blank results
             if (error) {
                 console.log(error);
@@ -21,23 +21,25 @@ var Jedi = {
             //console.log(results);
             //make results
             var resultJson = JSON.stringify(results);
-            console.log(resultJson);
+            //console.log(resultJson);
             resultJson = JSON.parse(resultJson);
             thisJedi = resultJson[0];
 
+            //console.log(thisJedi);
             //send JSON to Express
             if (!thisJedi) {
                 console.log("401: No Jedi with name " + thisName);
                 res.status(401).send('Invalid User');
             } else if (thisJedi.Password !== thisPass) {
-                console.log("401: " + thisJedi.Password + ", " + thisPass);
+                console.log("401: Bad password for " + thisName);
                 res.status(401).send('Invalid Password');
             } else {
-                console.log("200: " + thisJedi.Password + ", " + thisPass);
+                console.log("200: Loggin successful for " + thisName);
                 //This simple yes/no seems to be good enough?
                 //let payload = {subject: someJedi.ID};
                 //let token = jwt.sign(payload, 'MGNiZTc2MTAxZDg2MzJmMzNhYjY5NmZkODIzMjQ2OTA3NDI3MDFjMiAgLQo=');
-                res.json(resultJson[0]);
+                delete thisJedi.Password;
+                res.json(thisJedi);
             }
         });
     },
